@@ -1,0 +1,14 @@
+{
+	"dependencies": {
+		"better-sqlite3": "^13.0.3",
+		"discord.js": "^14.27.0"
+	},
+	"devDependencies": {
+		"typescript": "^7.0.2"
+	},
+	"scripts": {
+		"start": "node --env-file=.env ./src/index.ts",
+		"dev": "node --env-file=.env --watch ./src/index.ts"
+	},
+	"main": "./src/index.ts"
+}
