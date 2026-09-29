@@ -3,7 +3,6 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import { Client, Collection, Events, GatewayIntentBits, MessageFlags } from "discord.js";
-import { url } from 'node:inspector/promises';
 
 const DISC_TOKEN = process.env.DISCORD_TOKEN;
 
@@ -19,10 +18,9 @@ client.once(Events.ClientReady, (readyClient) => {
 
 client.login(DISC_TOKEN);
 
-
 client.commands = new Collection();
 
-const foldersPath = path.join(__dirname, 'commands');
+const foldersPath = path.join(import.meta.dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
@@ -44,7 +42,6 @@ for (const folder of commandFolders) {
 client.on(Events.InteractionCreate, async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
 	const command = interaction.client.commands.get(interaction.commandName);
-	console.log(`COMMAND: ${command}`);
 
 	if (!command) {
 		console.error(`No command matching ${interaction.commandName} was found.`);
