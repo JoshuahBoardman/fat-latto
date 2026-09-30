@@ -9,7 +9,7 @@
 	"scripts": {
 		"start": "node --env-file=.env ./src/index.ts",
 		"dev": "node --env-file=.env --watch ./src/index.ts",
-		"register": "node --env-file=.env ./src/deploy-commands.ts"
+		"dev-register": "node --env-file=.env ./src/dev-deploy-commands.ts"
 	},
 	"main": "./src/index.ts",
 	"type": "module"

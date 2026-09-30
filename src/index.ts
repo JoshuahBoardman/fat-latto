@@ -20,6 +20,40 @@ client.login(DISC_TOKEN);
 
 client.commands = new Collection();
 
+/*TODO: Desired Command List:
+	- User Commands:
+		- Register the calling users choice to their choice pool 
+		- Update one of calling users registered choices
+		- Delete one of the calling users registered choices
+		- List the calling users registered choices
+		- List a specified users choices	
+		- Server Commands:
+		- List all guild user choices
+		- List all guild users with registered choices
+	- Lottery Commands:
+		- Start a lottery for all users in the guild.
+			- Otional Arguments:
+				- Minimum numbers of participants and all choices must uphold that number of users.
+				- Filter out users who do not have choices that can uphold the number of participants.
+				- Filter out choices that are nsfw
+				- Specify lottery type (should it be weighted or not.)
+		- Start a lottery for all users in a specific channel.
+		- Start a lottery for only specified users
+		- Create a post for a lottery, where reactions and comments act as opt ins to a lottery. 
+	- Admin Commands:
+		- Delete a specified users choice
+		- Update a specified users choice
+		- Add a choice to a specified users choice pool
+		- Ban a user from taking part in future lotteries
+	- Config Commands:
+		- Specifiy the purpose of this bot in this channel
+		- Specify default optional params for specific comands
+	- Utility Commands:
+
+*/
+
+//TODO: Should break gathering the commands out into a function:
+//	- This would allow reuse for deployment scripts
 const foldersPath = path.join(import.meta.dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 
@@ -39,6 +73,7 @@ for (const folder of commandFolders) {
 	}
 }
 
+//TODO: Break out listeners to their own files and then register them all here 
 client.on(Events.InteractionCreate, async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
 	const command = interaction.client.commands.get(interaction.commandName);
