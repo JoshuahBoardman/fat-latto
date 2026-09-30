@@ -1,4 +1,4 @@
-import type { ChatInputCommandInteraction, Collection, SlashCommandBuilder } from "discord.js";
+import type { ChatInputCommandInteraction, Collection, SlashCommandBuilder, Client, ClientEvents } from "discord.js";
 
 export interface Command {
 	data: SlashCommandBuilder;
@@ -12,3 +12,10 @@ declare module 'discord.js' {
 	}
 
 }
+
+export interface EventHandler<K extends keyof ClientEvents> {
+	name: K,
+	once: boolean,
+	execute: (...args: ClientEvents[K]) => void
+}
+

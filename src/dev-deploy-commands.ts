@@ -1,6 +1,6 @@
 // This is where you update/register the definitions of slash commands
-// TODO: Make a seperate command for global deployment
 
+//TODO: Move this to a scripts folder
 import { readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
