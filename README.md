@@ -23,9 +23,7 @@ A weighted lottery group decision Discord bot
     - [ ] edit: update one of your choices
     - [ ] remove: delete one of your choices
     - [ ] list: list your choices, or a specified user's
-    - [ ] pause: temporarily exclude yourself from lotteries in this channel
-    - [ ] resume: rejoin lotteries in this channel
-
+    
   - [ ] /lottery
     - [ ] start: run a lottery immediately for the channel or specified users
     - [ ] post: create a timed lottery post with Join and Leave buttons
@@ -41,6 +39,9 @@ A weighted lottery group decision Discord bot
 
   - [ ] /me
     - [ ] delete-data: delete all of your data from the bot
+    - [ ] pause: temporarily exclude yourself from lotteries in this channel
+    - [ ] resume: rejoin lotteries in this channel
+
 
   - [ ] /admin
     - [ ] choice

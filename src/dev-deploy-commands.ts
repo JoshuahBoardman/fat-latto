@@ -5,7 +5,6 @@ import { readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-
 import { REST, Routes, type RESTPutAPIApplicationGuildCommandsResult } from 'discord.js';
 
 const DISC_TOKEN = process.env.DISCORD_TOKEN ?? "";
