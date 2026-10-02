@@ -1,6 +1,8 @@
-import { SlashCommandBuilder, type ChatInputCommandInteraction, MessageFlags, ContainerBuilder } from "discord.js";
+import { SlashCommandBuilder, type ChatInputCommandInteraction, MessageFlags } from "discord.js";
 
 import { getChoiceList } from "../../repositories/choice.ts";
+import { render } from "../../components/choiceList.ts";
+import { type ChoiceContent } from "../../components/choice.ts";
 
 export const data = new SlashCommandBuilder().setName('choice-list').setDescription('Get all submitted user choices.');
 
@@ -17,40 +19,21 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 		return;
 	}
 
-	const containerComponent = new ContainerBuilder()
-		.setAccentColor(0x2C1E3A)
-		.addTextDisplayComponents((textDisplay) => {
-			//TODO: Add intent to the top header like "users choices in #intent"
-			return textDisplay.setContent(`## ${interaction.user.displayName} choices\n-# ${userChoices.length} choices`); //TODO: add pages out of pages once pagination is added
-		});
+	const choiceContnet: ChoiceContent[] = [];
 
 	for (const choice of userChoices) {
-		//TODO: Swap to section and support images
-
-		//TODO: Create componet builder file 
-
-		containerComponent.addSeparatorComponents((separator) => separator);
-		//TODO: Build content differtently
-
-		if (choice.link) {
-			containerComponent.addSectionComponents((section) => {
-				return section.addTextDisplayComponents((textDisplay) => {
-					return textDisplay.setContent(`
-						\n\n### ${choice.title}\n-# ${choice.nsfw ? "🔞 NSFW ·" : ""} Added <t:${Math.floor(choice.createdAt / 1000)}:d>\n${choice.description}\n${(choice.minUsers && choice.maxUsers) ? `👥${choice.minUsers}-${choice.maxUsers}` : ""}
-						`)
-				})
-					.setButtonAccessory((button) => {
-						return button.setLabel("Peep").setURL(choice.link as string)
-					})
-			})
-		}
-
-		containerComponent.addTextDisplayComponents((textDisplay) => {
-			return textDisplay.setContent(`
-				\n\n### ${choice.title}\n-# ${choice.nsfw ? "🔞 NSFW ·" : ""} Added <t:${Math.floor(choice.createdAt / 1000)}:d>\n${choice.description}\n${(choice.minUsers && choice.maxUsers) ? `👥 ${choice.minUsers}-${choice.maxUsers}` : ""}
-			`);
-		})
+		choiceContnet.push({
+			title: choice.title,
+			description: choice.description ?? "",
+			link: choice.link,
+			nsfw: choice.nsfw,
+			createdAt: choice.createdAt,
+			minUsers: choice.minUsers,
+			maxUsers: choice.maxUsers
+		});
 	}
+
+	const containerComponent = render({ userName: interaction.user.displayName, channelName: null, choices: choiceContnet });
 
 	await interaction.reply({
 		components: [containerComponent],
