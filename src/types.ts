@@ -1,4 +1,4 @@
-import type { ChatInputCommandInteraction, Collection, SlashCommandBuilder, Client, ClientEvents } from "discord.js";
+import type { ChatInputCommandInteraction, Collection, SlashCommandBuilder, Client, ClientEvents, SlashCommandSubcommandBuilder } from "discord.js";
 
 import type { Choice } from "./dummy-data";
 
@@ -7,12 +7,16 @@ export interface Command {
 	execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
 }
 
+export interface Subcommand {
+	data: SlashCommandSubcommandBuilder;
+	execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
+}
+
 declare module 'discord.js' {
 
 	interface Client {
 		commands: Collection<string, Command>
 	}
-
 }
 
 export interface EventHandler<K extends keyof ClientEvents> {

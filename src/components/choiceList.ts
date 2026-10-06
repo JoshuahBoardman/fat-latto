@@ -7,7 +7,7 @@ export interface ChoiceListContent {
 	channelName: string | null
 	choices: ChoiceContent[]
 }
-
+//TODO: Add option for making non ephemeral 
 function formatContent(content: ChoiceListContent): string {
 
 	const contentSections = {

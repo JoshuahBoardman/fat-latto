@@ -21,7 +21,6 @@ export default async function loadCommands(): Promise<Collection<string, Command
 			// Set a new item in the Collection with the key as the command name and the value as the exported module
 			if ('data' in command && 'execute' in command) {
 				commands.set(command.data.name, command);
-				console.log(`Name: ${command.data.name}`);
 			} else {
 				console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
 			}
@@ -30,3 +29,6 @@ export default async function loadCommands(): Promise<Collection<string, Command
 
 	return commands;
 }
+
+
+//MAYBE: Add a function for loading subcommands into a parnet command 

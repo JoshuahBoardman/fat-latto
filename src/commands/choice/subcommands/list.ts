@@ -1,19 +1,22 @@
-import { SlashCommandBuilder, type ChatInputCommandInteraction, MessageFlags } from "discord.js";
+import { SlashCommandSubcommandBuilder, ChatInputCommandInteraction, MessageFlags } from 'discord.js';
 
-import { getChoiceList } from "../../repositories/choice.ts";
-import { render } from "../../components/choiceList.ts";
-import { type ChoiceContent } from "../../components/choice.ts";
+import { getChoiceList } from "../../../repositories/choice.ts";
+import { render } from "../../../components/choiceList.ts";
+import { type ChoiceContent } from "../../../components/choice.ts";
 
-export const data = new SlashCommandBuilder().setName('choice-list').setDescription('Get all submitted user choices.');
+export const data = new SlashCommandSubcommandBuilder()
+	.setName("list")
+	.setDescription("List your choices, or another user's");
 
-//TODO: Should be a hard limit to the number of choices that a user can have registered at any given time
-//	- This will prevent more complecated pagination set up for now. 
+
 export async function execute(interaction: ChatInputCommandInteraction) {
 	//#2c1e3a
 	const userChoices = await getChoiceList(interaction.channelId, interaction.user.id);
 
+	//TODO: Remove log
 	console.log(interaction.channelId, interaction.user.id);
 
+	//MAYBE: we should have some type of default handleing accross all commands if things dont run correctly.
 	if (!userChoices.length) {
 		await interaction.reply({ content: 'No choices found.', flags: MessageFlags.Ephemeral });
 		return;
