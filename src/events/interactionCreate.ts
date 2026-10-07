@@ -4,6 +4,8 @@ export default {
 	name: Events.InteractionCreate,
 	once: false,
 	execute: async (interaction: Interaction) => {
+
+		//TODO: Add checking for modal submit 
 		if (!interaction.isChatInputCommand()) return;
 		const command = interaction.client.commands.get(interaction.commandName);
 

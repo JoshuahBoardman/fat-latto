@@ -9,6 +9,7 @@ export const data = new SlashCommandSubcommandBuilder()
 	.setDescription("List your choices, or another user's");
 
 
+//TODO: should likely have a limit on the number of choices or paging
 export async function execute(interaction: ChatInputCommandInteraction) {
 	//#2c1e3a
 	const userChoices = await getChoiceList(interaction.channelId, interaction.user.id);
@@ -38,6 +39,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
 
 	const containerComponent = render({ userName: interaction.user.displayName, channelName: null, choices: choiceContnet });
 
+	//TODO: Likely want to defer reply while doing a lookup in the db and then use edit reply to follow up with the info
 	await interaction.reply({
 		components: [containerComponent],
 		flags: MessageFlags.Ephemeral | MessageFlags.IsComponentsV2
