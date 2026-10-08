@@ -1,6 +1,5 @@
 import { ModalBuilder, TextInputBuilder, TextInputStyle, LabelBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } from "discord.js";
 
-export const ADD_CHOICE_MODAL = 'addChoiceModal';
 export const CHOICE_FIELDS = {
 	title: 'choiceTitle',
 	description: 'choiceDescription',
@@ -81,8 +80,8 @@ function numberChoiceComponent(label: string, description: string, id: ChoiceFie
 //TODO: Refactor to handle editing choices too.
 //	- Should populate each section with relivant data and submission should set the change as the new data 
 //TODO: Make this handle populating fileds with channel spcific user configured text
-export function render(): ModalBuilder {
-	const responseModal = new ModalBuilder().setCustomId(ADD_CHOICE_MODAL).setTitle('Add Lottery Choice');
+export function render(id: string, title: string): ModalBuilder {
+	const responseModal = new ModalBuilder().setCustomId(id).setTitle(title);
 
 	responseModal.addLabelComponents(makeTitleComponent());
 	responseModal.addLabelComponents(makeDescriptionComponent());

@@ -5,6 +5,11 @@ export default {
 	once: false,
 	execute: async (interaction: Interaction) => {
 
+		if (interaction.isModalSubmit() || interaction.isButton() || interaction.isStringSelectMenu()) {
+			const [commandName] = interaction.customId.split(":");
+			await interaction.client.commands.get(commandName)?.handleResponse?.(interaction);
+		}
+
 		//TODO: Add checking for modal submit 
 		if (!interaction.isChatInputCommand()) return;
 		const command = interaction.client.commands.get(interaction.commandName);
