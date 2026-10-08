@@ -2,7 +2,7 @@ import { SlashCommandSubcommandBuilder, ModalBuilder, MessageFlags, ChatInputCom
 
 import { createModalHandler } from '../../../types.ts';
 
-import { render as renderModal, CHOICE_FIELDS } from '../../../components/addModal.ts';
+import { render as renderModal, CHOICE_FIELDS } from '../../../components/choiceModal.ts';
 
 export const data = new SlashCommandSubcommandBuilder()
 	.setName("add")
